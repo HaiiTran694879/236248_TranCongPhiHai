@@ -44,7 +44,30 @@ docker push <dockerhub-username>/food-management-backend:latest
 
 Đường dẫn image nộp bài: `docker.io/haiitran694879/food-management-backend:latest`.
 
-## 6. Triển khai
+## 6. Chạy frontend bằng Docker
+
+`VITE_API_URL` được nhúng vào bundle khi build image. Khi chạy local, frontend có thể dùng backend được publish trên máy tại port `3000`; khi triển khai cloud, thay bằng URL public của backend:
+
+```powershell
+docker build --build-arg VITE_API_URL=http://localhost:3000/api/foods -t food-management-frontend:latest ./frontend
+docker run --rm --name foods-frontend -p 8080:8080 food-management-frontend:latest
+```
+
+Mở `http://localhost:8080` để kiểm tra giao diện. Không truyền secrets qua build args; URL API là cấu hình public được client sử dụng.
+
+## 7. Đẩy frontend image lên Docker Hub
+
+```powershell
+docker tag food-management-frontend:latest haiitran694879/food-management-frontend:latest
+docker push haiitran694879/food-management-frontend:latest
+docker pull haiitran694879/food-management-frontend:latest
+docker run --rm --name foods-frontend -p 8080:8080 haiitran694879/food-management-frontend:latest
+```
+
+Đường dẫn image nộp bài: `docker.io/haiitran694879/food-management-frontend:latest`.
+Mở `http://localhost:8080` để truy cập giao diện. Khi build cho cloud, đặt `VITE_API_URL` thành URL public của backend, không dùng `localhost`.
+
+## 8. Triển khai
 - GitHub: https://github.com/HaiiTran694879/236248_TranCongPhiHai
 - Frontend: Chưa triển khai
 - Backend API: Chưa triển khai
