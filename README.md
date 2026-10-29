@@ -69,5 +69,6 @@ Mở `http://localhost:8080` để truy cập giao diện. Khi build cho cloud, 
 
 ## 8. Triển khai
 - GitHub: https://github.com/HaiiTran694879/236248_TranCongPhiHai
-- Frontend: Chưa triển khai
-- Backend API: Chưa triển khai
+- Frontend: Chưa có URL Render công khai; Docker image đã sẵn sàng tại `docker.io/haiitran694879/food-management-frontend:render-1`
+- Backend API: https://api-236248.onrender.com
+- Backend health: https://api-236248.onrender.com/health
